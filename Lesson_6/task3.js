@@ -10,3 +10,5 @@ function checkOrder(available, ordered) {
   }
 }
 console.log(checkOrder(30, 20));
+console.log(checkOrder(30, 0));
+console.log(checkOrder(30, 40));
