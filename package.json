@@ -1,0 +1,25 @@
+{
+  "name": "lesson-2",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "axios": "^1.6.2",
+    "eslint": "^9.34.0",
+    "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "prettier": "3.6.2"
+  }
+}
