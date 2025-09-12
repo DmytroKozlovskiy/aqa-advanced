@@ -1,8 +1,9 @@
-const axios = require('axios');
+
+const RequestController = require('./controllers/RequestController');
 
 describe('API requests', () => {
   it('should make a GET request', async () => {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+    const response = await RequestController.getRequest();
     expect(response.status).toBe(200);
     expect(response.data).toHaveProperty('title');
     console.log('First test response:', response.data);
@@ -10,15 +11,15 @@ describe('API requests', () => {
 
 
   it('GET /users should return status 200 and array of users', async () => {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+    const response = await RequestController.getUsersInfo();
     expect(response.status).toBe(200);
     expect(Array.isArray(response.data)).toBe(true);
     expect(response.data[0]).toHaveProperty('username');
-    console.log('Second test response:', response.data[6]);
+    console.log('Second test response:', response.data[0]);
   });
 
   it('GET /comments?postId=1 should return comments for post 1', async () => {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/comments?postId=1');
+    const response = await RequestController.getComments();
     expect(response.status).toBe(200);
     expect(Array.isArray(response.data)).toBe(true);
     expect(response.data[0]).toHaveProperty('postId');
@@ -27,11 +28,7 @@ describe('API requests', () => {
   });
 
   it('POST /should create a new post', async () => {
-    const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
-      title: 'New Post',
-      body: 'This is a new post',
-      userId: 1,
-    });
+    const response = await RequestController.createNewPost();
     expect(response.status).toBe(201);
     expect(response.data).toHaveProperty('title', 'New Post');
     expect(response.data).toHaveProperty('body', 'This is a new post');
@@ -40,13 +37,13 @@ describe('API requests', () => {
   })
 
   it('POST /comments should create a new comment', async () => {
-    newComment = {
+    const newComment = {
       name: 'John Doe',
       email: '8oVbE@example.com',
       body: 'This is a new comment',
       postId: 1
     }
-    const response = await axios.post('https://jsonplaceholder.typicode.com/comments', newComment);
+    const response = await RequestController.createNewComment(newComment);
     expect(response.status).toBe(201);
     expect(response.data).toHaveProperty('name', 'John Doe');
     expect(response.data).toHaveProperty('email', '8oVbE@example.com');
@@ -55,7 +52,5 @@ describe('API requests', () => {
     expect(response.data).toHaveProperty('id');
     console.log('Fifth test response:', response.data);
   });
-   
-  
 
 });
